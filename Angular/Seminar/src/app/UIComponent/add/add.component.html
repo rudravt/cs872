@@ -1,0 +1,42 @@
+<app-coordinator></app-coordinator>
+<section class="center">
+    <div class="display-box">
+        <form [formGroup]="addForm" novalidate>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Title*" formControlName="title">
+                <mat-error class="error" *ngIf="hasError('title','required')">
+                    Please fill the title
+                </mat-error>
+            </mat-form-field>&nbsp;&nbsp;
+            <mat-form-field>
+                <input matInput type="text" placeholder="Name of the Speaker" formControlName="speakername">
+                <mat-error class="error" *ngIf="hasError('speakername','required')">
+                    Please give the name
+                </mat-error>
+            </mat-form-field><br>
+            <mat-form-field class="iptwidth">
+                <textarea matInput placeholder="Abstract*" formControlName="abstract" rows="2"></textarea>
+                <mat-error class="error" *ngIf="hasError('abstract','required')">
+                    Give the abstract
+                </mat-error>
+            </mat-form-field><br>
+            <mat-form-field>
+                <input matInput [matDatepicker]="myDatePicker" placeholder="Start Date*" formControlName="startDate"
+                    disabled>
+                <mat-datepicker-toggle matSuffix [for]="myDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #myDatePicker disabled="false"></mat-datepicker>
+            </mat-form-field>&nbsp;
+            <mat-form-field>
+                <input matInput [matDatepicker]="Picker" placeholder="End Date*" formControlName="endDate" disabled>
+                <mat-datepicker-toggle matSuffix [for]="Picker"></mat-datepicker-toggle>
+                <mat-datepicker #Picker disabled="false"></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="iptwidth">
+                <textarea matInput placeholder="Venue" formControlName="venue" rows="2"></textarea>
+            </mat-form-field><br><br>
+            <div style="text-align: center;">
+                <button mat-raised-button [disabled]="!addForm.valid" (click)="onAdd()">Submit</button>
+            </div>
+        </form>
+    </div>
+</section>

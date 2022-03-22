@@ -1,0 +1,27 @@
+<app-coordinator></app-coordinator>
+<mat-grid-list cols="4" rowHeight="31rem">
+  <!-- <mat-grid-tile class="border-box" colspan="1">tile1</mat-grid-tile> -->
+  <mat-grid-tile colspan="4">
+    <section class="liststyle">
+      <div>
+        <h1><span>YOUR SEMINARS</span></h1>
+        <mat-list>
+          <mat-list-item id="box-color" *ngFor="let seminar of seminars">
+            {{ seminar.seminarTitle }}
+            <span class="rightmost"></span>
+            <span>
+              <mat-icon class="cursorchange" style="padding-right: 40px;" (click)="onEdit(seminar.seminarID)">create
+              </mat-icon>
+            </span>
+            <span>
+              <mat-icon class="cursorchange" style="padding-right: 40px;" (click)="onDelete(seminar.seminarID)">delete
+              </mat-icon>
+            </span>
+            <button mat-raised-button class="cursorchange" (click)="ondisplay(seminar.seminarID)">display</button>
+            <mat-divider id="box-color"></mat-divider>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </section>
+  </mat-grid-tile>
+</mat-grid-list>

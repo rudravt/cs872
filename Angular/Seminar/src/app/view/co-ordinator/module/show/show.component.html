@@ -1,0 +1,28 @@
+<app-coordinator></app-coordinator>
+<div class="container st-login" style="margin-top: 5px;">
+    <div class="dialogproperty">
+        <form [formGroup]="seminarTitleForm" novalidate class="example-form">
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-select placeholder="Select Seminar*" formControlName="seminarTitle">
+                    <mat-option *ngFor="let seminar of seminars" [value]="seminar.seminarID">
+                        {{seminar.seminarTitle}}
+                    </mat-option>
+                </mat-select>
+                <mat-error class="error" *ngIf="hasError('seminarTitle','required')">
+                    Please choose one
+                </mat-error>
+            </mat-form-field><br>
+            <button mat-raised-button [disabled]="!seminarTitleForm.valid" (click)="show()">
+                Show Queries
+            </button>
+        </form>
+    </div>
+</div>
+<div class="container st-login" style="margin-top: 10px;">
+    <p>Queries over here!!!</p>
+    <mat-list>
+        <mat-list-item id="box-color" *ngFor="let query of priorityQueries">
+            {{ query.query }}
+        </mat-list-item>
+    </mat-list>
+</div>

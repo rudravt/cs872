@@ -1,0 +1,30 @@
+<app-coordinator></app-coordinator>
+<section style="text-align: center; padding-top: 5rem">
+    <div style="border: solid;">
+        <p style="font-weight: bold; text-align: center;">Edit Details</p>
+        <form [formGroup]="editForm" novalidate>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Speaker" formControlName="speaker">
+            </mat-form-field><br>
+            <mat-form-field>
+                <input matInput [matDatepicker]="myDatePicker" placeholder="Choose a StartDate"
+                    formControlName="startDate" disabled>
+                <mat-datepicker-toggle matSuffix [for]="myDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #myDatePicker disabled="false"></mat-datepicker>
+            </mat-form-field><br>
+            <mat-form-field>
+                <input matInput [matDatepicker]="Picker" placeholder="Choose a EndDate" formControlName="endDate"
+                    disabled>
+                <mat-datepicker-toggle matSuffix [for]="Picker"></mat-datepicker-toggle>
+                <mat-datepicker #Picker disabled="false"></mat-datepicker>
+            </mat-form-field><br>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Venue" formControlName="venue">
+            </mat-form-field><br>
+        </form>
+        <div style="right: inherit;">
+            <button mat-button (click)="onEdit()" color="primary">Edit</button>
+            <button mat-button (click)="cancel()" color="primary">Close</button>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,30 @@
+<div class="container st-login">
+    <div class="dialogproperty" style="margin: 30px 20px 20px 20px; height: auto;">
+        <div class="row">
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <form [formGroup]="studloginForm" novalidate class="example-form">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-select placeholder="Select Seminar*" formControlName="seminarTitle">
+                            <mat-option *ngFor="let seminar of seminars" [value]="seminar">
+                                {{seminar}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error class="error" *ngIf="hasError('seminarTitle','required')">
+                            Please choose one
+                        </mat-error>
+                    </mat-form-field><br>
+
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <input matInput type="password" placeholder="Password*" formControlName="password">
+                        <mat-error class="error" *ngIf="hasError('password','required')">
+                            Password field required
+                        </mat-error>
+                    </mat-form-field><br>
+                    <button mat-raised-button [disabled]="!studloginForm.valid" (click)="onstudclick()">
+                        Login
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

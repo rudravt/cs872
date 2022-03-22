@@ -1,0 +1,98 @@
+div,a, span {
+    font-family: 'Bree Serif', serif;
+    font-weight: lighter;
+}
+/* .jumbotron{
+    margin-bottom: 0px ;
+} */
+.welcomeHeader{
+    margin-bottom: 0px ;
+    background-color: whitesmoke;
+    padding: 1rem 1rem;
+}
+/*.chngwidth{
+    position: relative;
+    top: -65px;
+    margin-left: 22rem;
+    width: 600px;
+    z-index: 1;
+}*/
+html, body { height: 100%; }
+
+/*.spacer{
+    border-radius: 5px;
+    flex: 1 1 auto;
+    text-align: center;
+    margin-left: 20px; 
+}
+.spacer button{
+    background-color: transparent; 
+}*/
+mat-grid-tile{
+    border: 2px solid black;
+}
+
+.rightmost{
+    flex: 1 1 auto;
+}
+.st-login{
+    border-radius: 20px;
+    border: 1px solid black;
+}
+.dialogproperty{
+    margin: 50px 20px 20px 20px;
+    text-align: center;
+}
+
+.display-box{
+    border: 3px solid black;
+    border-radius: 10px;
+    width: 40rem;
+    padding: 5rem 5rem 4rem 6rem;
+}
+.iptwidth{
+    width: 375px;
+}
+.center{
+    padding-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+.cursorchange{
+    cursor: pointer;
+}
+#box-color{
+    color: #3a98f0;
+}
+/* .liststyle mat-list-item:hover{
+    background-color: rgb(14, 56, 59);
+} */
+.liststyle{
+  width: 80%;
+}
+.bgcolor{
+    background-color: #BAB86C;
+    color: #fcfafa;
+}
+.fgcolor{
+    background-color: #fcfafa;
+    color: #BAB86C;
+}
+/*.active{
+    background: yellowgreen;
+    color: wheat;
+}*/
+
+
+.background{
+    background-color: #F0FFF0;
+}
+.content{
+    padding-left: 10px;
+}
+.box {
+    border: solid 4px #000;
+}
+.mat-button:hover{
+    background-color: #BA55D3;
+  }

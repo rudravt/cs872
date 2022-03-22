@@ -1,0 +1,20 @@
+<section>
+    <div>
+        <mat-dialog-content>
+            <p style="font-weight: bold; text-align: center;">{{data[0].seminarTitle}}</p>
+            <p style="font-weight: bold;">Abstract:</p>
+            <p>{{data[0].abstract}}</p>
+            <p style="font-weight: bold;">Speaker:</p>
+            <p>{{data[0].speaker}}</p>
+            <p style="font-weight: bold;">Start Date:</p>
+            <p>{{startDate}}</p>
+            <p style="font-weight: bold;">End Date:</p>
+            <p>{{endDate}}</p>
+            <p style="font-weight: bold;">Venue:</p>
+            <p>{{data[0].venue}}</p>
+        </mat-dialog-content>
+        <mat-dialog-actions style="right: inherit;">
+            <button mat-button matDialogClose="cancel" color="primary" (click)="registerForSeminar()">Register</button>
+        </mat-dialog-actions>
+    </div>
+</section>

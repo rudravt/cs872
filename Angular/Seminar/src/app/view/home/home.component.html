@@ -1,0 +1,57 @@
+<section>
+    <mat-toolbar>
+        <div>
+            <button mat-button (click)="onstudclick()">ATTENDEE</button>
+            <button mat-button (click)="oncoordinatorclick()">COORDINATOR</button>
+        </div>
+        <span class="rightmost"></span>
+        <div>
+            <button mat-button (click)="onregister()">SignUp</button>
+        </div>
+    </mat-toolbar>
+</section>
+<section class="welcomeHeader">
+    <h1><span>
+            WELCOME TO QUESTION AGGREGATOR!!
+        </span></h1>
+</section>
+<!--<mat-grid-list cols="3" rowHeight="415px">
+    <mat-grid-tile  colspan="1"  >tile1</mat-grid-tile>
+    <mat-grid-tile colspan="2" >
+        <div>
+            <h1>hello</h1><br>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente minima ipsa unde similique totam soluta fuga distinctio culpa! Architecto minus expedita facilis quo optio unde numquam impedit officiis adipisci laboriosam.</p>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>-->
+<mat-grid-list cols="3" rowHeight="415px">
+    <mat-grid-tile class="box" colspan="1">
+        <div style="text-align: center;">
+            <h2>Todays Seminars</h2>
+            <mat-list>
+                <mat-list-item id="box-color" class="cursorchange" *ngFor="let seminar of seminars"
+                    (click)="showDetails(seminar.seminarID)">
+                    {{ seminar.seminarTitle }}
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile class="background" colspan="2">
+        <div class="content">
+            <h1><span> ABOUT WEBSITE ! </span></h1><br>
+            <p>Seminars are in trend nowadays and doubt solving round followed by speech delivery is one of the most
+                important part of the Semninars, its the simplest way to clear your doubts from that very source you get
+                the knowledge from. That is why it is very important task to nmanage that round in a way that everyone
+                can ask their doubts easily and each and every relevant queries related to topic will be solved in given
+                short time period.</p>
+            <br>
+            <p>We are providing platform to ask your queries by posting it here. So, no attendents should remember their
+                doubt or wait till the query solving round to ask it. Moreover it reduces the communication and language
+                problems as over tool process the queries backside and make it the way it should be. It's not just that,
+                It is doing very important job of sorting the asked question on basis of frequency and relevancy,
+                Therefore it is very easy to solve the most relevant queries and the doubts of most of the attendent in
+                just the small amount of time provided for the query solving round.</p>
+        </div>
+    </mat-grid-tile>
+
+</mat-grid-list>

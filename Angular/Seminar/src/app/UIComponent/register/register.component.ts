@@ -24,11 +24,11 @@ export class RegisterComponent implements OnInit {
       ]),
       u_id: new FormControl("", [
         Validators.required,
-        Validators.pattern("^[A-Za-z0-9]{1,6}$"),
+        Validators.pattern("^[A-Za-z0-9]$"),
       ]),
       password: new FormControl("", [
         Validators.required,
-        Validators.minLength(6)
+        Validators.minLength(8)
       ])
     })
   }

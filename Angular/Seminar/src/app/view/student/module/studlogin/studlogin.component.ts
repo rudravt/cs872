@@ -6,6 +6,7 @@ import { ConnectBackendService } from 'src/app/controller/connect-backend.servic
 import { SeminarLoginInfo } from 'src/app/model/seminar-login-info';
 import { PopupComponent } from 'src/app/view/InfoPopUp/popup/popup.component';
 import { Decision } from 'src/app/model/decision';
+import { SeminarDetails } from 'src/app/model/seminar-details';
 
 @Component({
   selector: 'app-studlogin',
@@ -13,7 +14,7 @@ import { Decision } from 'src/app/model/decision';
   styleUrls: ['./studlogin.component.css']
 })
 export class StudloginComponent implements OnInit {
-  seminars = [];
+  seminars: SeminarDetails[];
   loginInfo: SeminarLoginInfo;
   studloginForm: FormGroup;
   isLoggedIn: Decision;
@@ -31,6 +32,7 @@ export class StudloginComponent implements OnInit {
 
   ngOnInit(): void {
     this.connectBackendService.getAllSeminar().subscribe(data => {
+      this.seminars = [];
       for (var field in data) {
         this.seminars.push(data[field].seminarTitle);
       }

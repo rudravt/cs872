@@ -26,8 +26,8 @@ app.post('/insertDetails', (req, res) => {
     seminarID = seminarID.replace('-', '_');
     const insertSeminarQuery = `insert into seminars (seminarID, seminarTitle, abstract, speaker, venue, seminarStartingDate, seminarEndDate, userId) values (${mysql.escape(seminarID)}, ${mysql.escape(seminarTitle)}, ${mysql.escape(abstract)}, ${mysql.escape(speaker)}, ${mysql.escape(venue)}, ${mysql.escape(seminarStartingDate)}, ${mysql.escape(seminarEndDate)}, ${mysql.escape(userID)});`;
     let abstractKeywords = rake.generate(abstract);
-    const creatRelaedWordTable = `create table ?? (word VARCHAR(100), primary key(word));`;
-    const createQueryTable = `create table ?? (query VARCHAR(500), priority INT, frequancy INT);`;
+    const creatRelaedWordTable = `create table ?? (word VARCHAR(500), primary key(word));`;
+    const createQueryTable = `create table ?? (query VARCHAR(50), priority INT, frequancy INT);`;
 
     try {
         con.query(insertSeminarQuery, err => {
@@ -44,7 +44,7 @@ app.post('/insertDetails', (req, res) => {
         abstractKeywords.forEach(e => {
             const insertWordQuery = `insert into ?? (word) values (${mysql.escape(e.toLowerCase())});`;
             con.query(insertWordQuery, [seminarID], err => {
-                if (err) throw err;
+                if (err) console.log(err);
             });
         });
         fs.readFile('./corpus/corpus.json', (err, data) => {

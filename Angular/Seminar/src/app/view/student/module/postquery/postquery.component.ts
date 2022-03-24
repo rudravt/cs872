@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators, FormGroupName } from '@angular/form
 import { ConnectBackendService } from 'src/app/controller/connect-backend.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from 'src/app/view/InfoPopUp/popup/popup.component';
+import { Questions } from 'src/app/model/questions';
 
 @Component({
   selector: 'app-postquery',
@@ -11,9 +12,9 @@ import { PopupComponent } from 'src/app/view/InfoPopUp/popup/popup.component';
   styleUrls: ['./postquery.component.css']
 })
 export class PostqueryComponent implements OnInit {
-  questions = [];
+  questions: Questions[] = [];
   queryForm: FormGroup;
-  query: string;
+  query;
   seminarTitle = localStorage.getItem('seminarTitle');
 
   constructor(private activatedroute: ActivatedRoute, private router: Router, private connectBackendService: ConnectBackendService, private dialog: MatDialog) {
@@ -30,7 +31,6 @@ export class PostqueryComponent implements OnInit {
       this.query = this.queryForm.controls.query.value;
     }
     this.connectBackendService.postQuery(this.query).subscribe(data => {
-      console.log(data);
       if (!data) {
         var message = "Please enter valid query";
         this.dialog.open(PopupComponent, { data: message });

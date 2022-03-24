@@ -10,8 +10,8 @@
             </mat-form-field>&nbsp;&nbsp;
             <mat-form-field>
                 <input matInput type="text" placeholder="Name of the Speaker" formControlName="speakername">
-                <mat-error class="error" *ngIf="hasError('speakername','required')">
-                    Please give the name
+                <mat-error class="error" *ngIf="hasError('speakername','pattern')">
+                    SHould contain alphabate only
                 </mat-error>
             </mat-form-field><br>
             <mat-form-field class="iptwidth">
@@ -21,13 +21,14 @@
                 </mat-error>
             </mat-form-field><br>
             <mat-form-field>
-                <input matInput [matDatepicker]="myDatePicker" placeholder="Start Date*" formControlName="startDate"
-                    disabled>
+                <input matInput [min]="minDate" [matDatepicker]="myDatePicker" (dateInput)="setMaxDate($event)"
+                    (dateChange)="setMaxDate($event)" placeholder="Start Date*" formControlName="startDate" disabled>
                 <mat-datepicker-toggle matSuffix [for]="myDatePicker"></mat-datepicker-toggle>
                 <mat-datepicker #myDatePicker disabled="false"></mat-datepicker>
             </mat-form-field>&nbsp;
             <mat-form-field>
-                <input matInput [matDatepicker]="Picker" placeholder="End Date*" formControlName="endDate" disabled>
+                <input matInput [min]="maxDate" [matDatepicker]="Picker" placeholder="End Date*"
+                    formControlName="endDate" disabled>
                 <mat-datepicker-toggle matSuffix [for]="Picker"></mat-datepicker-toggle>
                 <mat-datepicker #Picker disabled="false"></mat-datepicker>
             </mat-form-field>

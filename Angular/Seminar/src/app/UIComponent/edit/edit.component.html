@@ -7,14 +7,15 @@
                 <input matInput type="text" placeholder="Speaker" formControlName="speaker">
             </mat-form-field><br>
             <mat-form-field>
-                <input matInput [matDatepicker]="myDatePicker" placeholder="Choose a StartDate"
-                    formControlName="startDate" disabled>
+                <input matInput [min]="minDate" [matDatepicker]="myDatePicker" (dateInput)="setMaxDate($event)"
+                    (dateChange)="setMaxDate($event)" placeholder="Choose a StartDate" formControlName="startDate"
+                    disabled>
                 <mat-datepicker-toggle matSuffix [for]="myDatePicker"></mat-datepicker-toggle>
                 <mat-datepicker #myDatePicker disabled="false"></mat-datepicker>
             </mat-form-field><br>
             <mat-form-field>
-                <input matInput [matDatepicker]="Picker" placeholder="Choose a EndDate" formControlName="endDate"
-                    disabled>
+                <input matInput matInput [min]="maxDate" [matDatepicker]="Picker" placeholder="Choose a EndDate"
+                    formControlName="endDate" disabled>
                 <mat-datepicker-toggle matSuffix [for]="Picker"></mat-datepicker-toggle>
                 <mat-datepicker #Picker disabled="false"></mat-datepicker>
             </mat-form-field><br>
@@ -23,7 +24,7 @@
             </mat-form-field><br>
         </form>
         <div style="right: inherit;">
-            <button mat-button (click)="onEdit()" color="primary">Edit</button>
+            <button mat-button [disabled]="!editForm.valid" (click)="onEdit()" color="primary">Edit</button>
             <button mat-button (click)="cancel()" color="primary">Close</button>
         </div>
     </div>

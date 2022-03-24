@@ -5,6 +5,7 @@ import { SeminarDetails } from 'src/app/model/seminar-details';
 import { ConnectBackendService } from 'src/app/controller/connect-backend.service';
 import { PopupComponent } from 'src/app/view/InfoPopUp/popup/popup.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-add',
@@ -14,13 +15,18 @@ import { MatDialog } from '@angular/material/dialog';
 export class AddComponent implements OnInit {
   addForm: FormGroup;
   seminarDetails: SeminarDetails;
+  minDate: Date;
+  maxDate: Date;
 
   constructor(private _activatedroute: ActivatedRoute, private _router: Router, private connectBackendService: ConnectBackendService, private dialog: MatDialog) {
+    const currentDate = new Date();
     this.addForm = new FormGroup({
       title: new FormControl("", [
         Validators.required
       ]),
-      speakername: new FormControl(""),
+      speakername: new FormControl("", [
+        Validators.pattern("^[A-Za-z]$")
+      ]),
       abstract: new FormControl("", [
         Validators.required
       ]),
@@ -28,6 +34,12 @@ export class AddComponent implements OnInit {
       endDate: new FormControl(),
       venue: new FormControl("")
     })
+    this.minDate = currentDate;
+    this.maxDate = this.minDate;
+  }
+
+  setMaxDate(event: MatDatepickerInputEvent<Date>) {
+    this.maxDate = event.value;
   }
 
   ngOnInit(): void {
@@ -46,6 +58,7 @@ export class AddComponent implements OnInit {
       this.connectBackendService.addSeminar(this.seminarDetails)
         .subscribe(msg => {
           if (msg) {
+            this.connectBackendService.coordinatorData$.next(this.seminarDetails);
             var message = "Added!!!";
             this.dialog.open(PopupComponent, { data: message });
             this._router.navigate(['/coordinator/coor-home']);

@@ -15,7 +15,7 @@ import { DisplaySeminarComponent } from './view/display-seminar/display-seminar.
     HomeComponent,
     PageNotFoundComponent,
     PopupComponent,
-    DisplaySeminarComponent
+    DisplaySeminarComponent,
   ],
   imports: [
     BrowserAnimationsModule,

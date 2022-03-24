@@ -22,10 +22,7 @@
                     Password is required
                 </mat-error>
                 <mat-error class="error" *ngIf="hasError('password','minlength')">
-                    length should be between 6-8
-                </mat-error>
-                <mat-error class="error" *ngIf="hasError('password','maxlength')">
-                    length should be between 6-8
+                    length should be minimum 8
                 </mat-error>
             </mat-form-field><br>
             <button mat-raised-button [disabled]="!registerForm.valid" (click)="onsubmit()">SignUp</button>

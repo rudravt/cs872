@@ -15,11 +15,10 @@ export class ConnectBackendService {
 
   constructor(private http: HttpClient) { }
 
-  // seminarDetails: SeminarDetails[] = [];
-  // coordinatorData$: Observable<SeminarDetails[]>;
-
-  coordinatorData$: BehaviorSubject<SeminarDetails[]> = new BehaviorSubject(null);
-  coordinatoData: Observable<SeminarDetails[]> = this.coordinatorData$.asObservable();
+  coordinatorData$: BehaviorSubject<SeminarDetails> = new BehaviorSubject(null);
+  coordinatoData: Observable<SeminarDetails> = this.coordinatorData$.asObservable();
+  allSeminars$: BehaviorSubject<SeminarDetails> = new BehaviorSubject(null);
+  allSeminar: Observable<SeminarDetails> = this.allSeminars$.asObservable();
 
   baseURL = 'http://localhost:4000/';
 
@@ -41,7 +40,7 @@ export class ConnectBackendService {
     return this.http.get<Decision>(this.baseURL + 'login/conductorLogin', { params: query });
   }
 
-  addSeminar(seminarDetails: SeminarDetails) {
+  addSeminar(seminarDetails: SeminarDetails): Observable<SeminarDetails> {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     headers.append('responseType', 'text');
     const httpOptions = {
@@ -56,17 +55,17 @@ export class ConnectBackendService {
       seminarEndDate: seminarDetails.endDate,
       userID: localStorage.getItem('userID')
     }
-    return this.http.post(this.baseURL + 'seminarDetails/insertDetails', body, httpOptions);
+    return this.http.post<SeminarDetails>(this.baseURL + 'seminarDetails/insertDetails', body, httpOptions);
   }
 
-  getConductedSeminar(): Observable<SeminarDetails[]> {
+  getConductedSeminar(): Observable<SeminarDetails> {
     const query = {
       userID: localStorage.getItem('userID'),
     }
-    return this.http.get<SeminarDetails[]>(this.baseURL + 'coordinator/allSeminarConducted', { params: query });
+    return this.http.get<SeminarDetails>(this.baseURL + 'coordinator/allSeminarConducted', { params: query });
   }
 
-  editSeminar(seminarDetail: SeminarDetails) {
+  editSeminar(seminarDetail: SeminarDetails): Observable<SeminarDetails> {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const httpOptions = {
       headers: headers
@@ -78,7 +77,7 @@ export class ConnectBackendService {
       seminarStartingDate: seminarDetail.startDate,
       seminarEndDate: seminarDetail.endDate
     }
-    return this.http.put(this.baseURL + 'coordinator/updateSeminarDetails', body, httpOptions);
+    return this.http.put<SeminarDetails>(this.baseURL + 'coordinator/updateSeminarDetails', body, httpOptions);
   }
 
   getAllSeminar(): Observable<SeminarDetails> {
@@ -107,7 +106,7 @@ export class ConnectBackendService {
     return this.http.get<Decision>(this.baseURL + 'login/attenderLogin', { params: query });
   }
 
-  postQuery(query: string) {
+  postQuery(query: string): Observable<Questions> {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const httpOptions = {
       headers: headers
@@ -117,7 +116,7 @@ export class ConnectBackendService {
       seminarTitle: localStorage.getItem('seminarTitle'),
       ID: localStorage.getItem('seminarID')
     }
-    return this.http.post(this.baseURL + 'attender/query', body, httpOptions);
+    return this.http.post<Questions>(this.baseURL + 'attender/query', body, httpOptions);
   }
 
   getQueries(ID): Observable<Questions[]> {

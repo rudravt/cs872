@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { StudloginComponent } from '../student/module/studlogin/studlogin.component';
@@ -14,11 +14,19 @@ import { DisplaySeminarComponent } from '../display-seminar/display-seminar.comp
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  seminars = [];
+  seminars: SeminarDetails[];
   seminar: SeminarDetails[];
 
+  @HostListener('window:focus') onFocus() {
+    console.log('window focus');
+
+    window.location.reload();
+  }
+
   constructor(private _activatedroute: ActivatedRoute, private _router: Router,
-    private dialog: MatDialog, private connectBackendService: ConnectBackendService) { }
+    private dialog: MatDialog, private connectBackendService: ConnectBackendService) {
+    this.getAllSeminar();
+  }
 
   onstudclick() {
     this.dialog.open(StudloginComponent, { width: '40%', height: '50%' });
@@ -30,14 +38,17 @@ export class HomeComponent implements OnInit {
     this.dialog.open(RegisterComponent)
   }
   ngOnInit(): void {
-    this.connectBackendService.coordinatoData.subscribe(() => this.getAllSeminar());
+    this.connectBackendService.allSeminar.subscribe(data => {
+      this.seminars = []
+      for (var field in data) {
+        this.seminars.push(data[field]);
+      }
+    })
   }
 
   getAllSeminar() {
     this.connectBackendService.getAllSeminar().subscribe(data => {
-      for (var field in data) {
-        this.seminars.push(data[field]);
-      }
+      this.connectBackendService.allSeminars$.next(data);
     });
   }
 

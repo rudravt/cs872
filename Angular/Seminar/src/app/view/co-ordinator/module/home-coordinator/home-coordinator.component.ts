@@ -20,6 +20,7 @@ export class HomeCoordinatorComponent implements OnInit {
   seminar: SeminarDetails[];
 
   constructor(private dialog: MatDialog, private connectBackendService: ConnectBackendService, private router: Router) {
+    this.getData();
   }
 
   ondisplay(ID): void {
@@ -28,17 +29,17 @@ export class HomeCoordinatorComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.connectBackendService.coordinatoData.subscribe(() => {
-      this.getData();
+    this.connectBackendService.coordinatoData.subscribe(data => {
+      this.seminars = [];
+      for (var field in data) {
+        this.seminars.push(data[field]);
+      }
     });
   }
 
   getData() {
-    this.seminars = [];
     this.connectBackendService.getConductedSeminar().subscribe(data => {
-      for (var field in data) {
-        this.seminars.push(data[field]);
-      }
+      this.connectBackendService.coordinatorData$.next(data);
     });
   }
 
@@ -51,7 +52,7 @@ export class HomeCoordinatorComponent implements OnInit {
     this.connectBackendService.deleteSeminar(ID).subscribe(data => {
       if (data) {
         this.connectBackendService.coordinatoData.subscribe(() => {
-          this.getData();
+          this.seminars.splice(this.seminars.indexOf(ID), 1)
         });
         var message = "Edit Successful";
         this.dialog.open(PopupComponent, { data: message });

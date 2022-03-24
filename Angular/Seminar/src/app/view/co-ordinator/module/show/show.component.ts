@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ConnectBackendService } from 'src/app/controller/connect-backend.service';
 import { Questions } from 'src/app/model/questions';
@@ -10,9 +10,14 @@ import { SeminarDetails } from 'src/app/model/seminar-details';
   styleUrls: ['./show.component.css']
 })
 export class ShowComponent implements OnInit {
+  @HostListener('window:focus') onFocus() {
+    console.log('window focus');
+
+    this.show();
+  }
   seminars: SeminarDetails[];
   seminarTitleForm: FormGroup;
-  queries: Questions[] = [];
+  queries: Questions[];
   priorityQueries: Questions[];
 
   constructor(private connectBackendService: ConnectBackendService) {
@@ -36,6 +41,7 @@ export class ShowComponent implements OnInit {
     if (this.seminarTitleForm.valid) {
       const title = this.seminarTitleForm.controls.seminarTitle.value;
       this.connectBackendService.getQueries(title).subscribe(data => {
+        this.queries = []
         if (data) {
           for (var field in data) {
             this.queries.push(data[field]);

@@ -1,5 +1,5 @@
 export interface Questions {
     query: string;
-    priority: number;
-    frequancy: number;
+    priority?: number;
+    frequancy?: number;
 }

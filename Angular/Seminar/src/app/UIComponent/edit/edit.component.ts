@@ -6,6 +6,7 @@ import { ConnectBackendService } from 'src/app/controller/connect-backend.servic
 import { PopupComponent } from 'src/app/view/InfoPopUp/popup/popup.component';
 import { SeminarDetails } from 'src/app/model/seminar-details';
 import { HomeCoordinatorComponent } from '../../view/co-ordinator/module/home-coordinator/home-coordinator.component';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-edit',
@@ -16,9 +17,12 @@ export class EditComponent implements OnInit {
   editForm: FormGroup;
   data;
   editData: SeminarDetails;
+  minDate: Date;
+  maxDate: Date;
   // public dialogRef: MatDialogRef<HomeCoordinatorComponent>,@Inject(MAT_DIALOG_DATA) public data, 
 
   constructor(private connectBackendService: ConnectBackendService, public dialog: MatDialog, private _router: Router, private route: ActivatedRoute) {
+    const currentDate = new Date();
     this.editForm = new FormGroup({
       title: new FormControl(""),
       speaker: new FormControl(""),
@@ -27,6 +31,12 @@ export class EditComponent implements OnInit {
       endDate: new FormControl(),
       venue: new FormControl("")
     })
+    this.minDate = currentDate;
+    this.maxDate = this.minDate;
+  }
+
+  setMaxDate(event: MatDatepickerInputEvent<Date>) {
+    this.maxDate = event.value;
   }
 
   ngOnInit(): void {
@@ -55,5 +65,8 @@ export class EditComponent implements OnInit {
   cancel() {
     this._router.navigate(['/coordinator/coor-home']);
   }
+  public hasError = (controlName: string, errorName: string) => {
+    return this.editForm.controls[controlName].hasError(errorName);
+  };
 
 }
